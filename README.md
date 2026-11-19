@@ -1,5 +1,7 @@
 # Sentinelip
 
+Repo: https://github.com/Leofiorett/sentinelip
+
 Suite gráfica de auditoría de redes. Modo real (root, raw sockets, iptables,
 WiFi monitor) + agente para mapear la red local del operador desde cualquier
 lugar + relay público con túnel Cloudflare.
