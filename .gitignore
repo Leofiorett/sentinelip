@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.log
+*.tar.gz
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+.ssh/
+agent_state.json
+local_url.txt
+agent_url.txt
+tunnel.pid
+checklist_state.json
+.DS_Store

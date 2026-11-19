@@ -1,0 +1,7 @@
+fastapi>=0.115,<0.116
+uvicorn>=0.32,<0.33
+scapy>=2.6,<2.7
+pydantic>=2.9,<3
+websockets>=13
+h11>=0.14
+fpdf2>=2.9,<3

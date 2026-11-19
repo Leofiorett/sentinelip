@@ -1,0 +1,45 @@
+services:
+  sentinelip:
+    build: .
+    image: sentinelip:real
+    container_name: sentinelip
+    restart: unless-stopped
+    network_mode: host
+    privileged: true
+    pid: host
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+      - SYS_ADMIN
+    volumes:
+      - /dev:/dev
+      - /sys:/sys
+      - /lib/modules:/lib/modules:ro
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/status', timeout=5)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+
+  caddy:
+    image: caddy:2-alpine
+    container_name: sentinelip-caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      SENTINEL_DOMAIN: ${SENTINEL_DOMAIN:-}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - sentinelip
+
+volumes:
+  caddy_data:
+  caddy_config:

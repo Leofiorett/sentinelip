@@ -1,0 +1,48 @@
+SENTINEL IP - PAQUETE PORTATIL
+=============================
+
+Contenido
+---------
+  install.sh            Instalador manual (Linux x86_64) - modo real + demo
+  install.bat           Instalador manual (Windows) - solo modo demo
+  install.command       Instalador manual (macOS) - solo modo demo
+  bin/                  Binario Linux autocontenido (PyInstaller, una sola capa)
+  demo/                 Codigo fuente + ruedas offline para modo demo
+  checksums.sha256      Verificacion de integridad
+
+Instalacion manual
+------------------
+  Linux:     bash install.sh            (instala en ~/.local/bin/sentinel)
+             bash install.sh --system   (instala en /usr/local/bin/sentinel, requiere root)
+  Windows:   doble clic en install.bat
+  macOS:     bash install.command  (o doble clic si el sistema lo permite)
+
+No hay autorrun: el pendrive no ejecuta nada al insertarse. Todo requiere
+que la persona ejecute explicitamente el instalador.
+
+Uso
+---
+  Linux (modo real):   sentinel --port 8000
+                       Solicita sudo. Requiere raw sockets, iptables y, para
+                       WiFi, chipset en modo monitor. Al terminar usa el
+                       boton PANICO en la interfaz (o POST /api/panic).
+  Linux (modo demo):   sentinel --demo --port 8000
+  Windows/macOS:       ejecuta el acceso directo sentinel-demo (solo demo).
+
+El modo demo usa una red industrial ficticia y desactiva todos los modulos
+ofensivos. Es la unica opcion en Windows/macOS.
+
+Requisitos
+----------
+  Linux:  x86_64, sudo, kernel con iptables/nftables. Probado en Kali/Debian/Ubuntu.
+  Windows/macOS: Python 3.11+ (las ruedas incluidas son para Python 3.14;
+                 si tu version difiere, el instalador puede usar PyPI).
+
+Verificacion
+------------
+  sha256sum -c checksums.sha256
+
+Aviso
+-----
+  Herramienta de doble uso. Usarla solo en laboratorios propios o con
+  autorizacion por escrito. El modo real modifica iptables/ip_forward.
