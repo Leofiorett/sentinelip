@@ -2094,3 +2094,10 @@ applyI18n = function () {
 
 // Cargar checklist al arranque
 loadAudit();
+
+// Enlaces profundos: /?panel=topo abre un panel directamente.
+const _panelParam = new URLSearchParams(location.search).get("panel");
+if (_panelParam) {
+  const _panelBtn = document.querySelector(`.nav[data-panel="${_panelParam}"]`);
+  if (_panelBtn) _panelBtn.click();
+}
